@@ -4,6 +4,7 @@ import { TideData } from '../types/tide';
 
 interface TideChartProps {
     data: TideData[];
+    date?: string;     // 新增：日期
 }
 
 function formatTime(timeStr: string) {
@@ -16,7 +17,11 @@ function getDateStr(timeStr: string) {
     return tIdx !== -1 ? timeStr.slice(0, tIdx) : timeStr;
 }
 
-const TideChart: React.FC<TideChartProps> = ({ data }) => {
+const TideChart: React.FC<TideChartProps> = ({ data, date }) => {
+    // 提取所有高潮和低潮时间
+    const highTides = data.filter(d => d.type === '高潮');
+    const lowTides = data.filter(d => d.type === '低潮');
+
     const chartData = {
         labels: data.map(d => formatTime(d.time)),
         datasets: [
@@ -47,23 +52,26 @@ const TideChart: React.FC<TideChartProps> = ({ data }) => {
                 }
             },
             legend: {
-                display: true
+                display: false // 隐藏图例
             }
         },
         scales: {
             y: {
-                beginAtZero: true,
-                title: {
-                    display: true,
-                    text: 'Height (m)',
-                },
-            },
-        },
+                beginAtZero: false
+            }
+        }
     };
 
     return (
-        <div style={{ width: '90%', height: '320px', margin: '0 auto', position: 'relative' }}>
-            <Line data={chartData} options={options} />
+        <div style={{ margin: '32px 0', padding: 12, border: '1px solid #eee', borderRadius: 8 }}>
+            {date && <div style={{ fontWeight: 'bold', fontSize: 18 }}>{date}</div>}
+            <div style={{ margin: '8px 0', fontSize: 15 }}>
+                <span style={{ color: 'red', marginRight: 12 }}>高潮: {highTides.map(d => d.time.slice(11, 16)).join(' | ') || '无'}</span>
+                <span style={{ color: 'green' }}>低潮: {lowTides.map(d => d.time.slice(11, 16)).join(' | ') || '无'}</span>
+            </div>
+            <div style={{ height: 260 }}>
+                <Line data={chartData} options={options} />
+            </div>
         </div>
     );
 };
