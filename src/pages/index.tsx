@@ -47,11 +47,12 @@ const IndexPage: React.FC = () => {
                 {camImgUrls.map((url, idx) => (
                     <div key={idx} style={{ flex: 1, textAlign: 'center', margin: '0 8px' }}>
                         <div style={{ fontWeight: 'bold', marginBottom: 8 }}>{camNames[idx]}</div>
-                        <div style={{ background: '#eee', height: 180, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <div style={{ background: '#eee', height: 180, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                             <img
                                 src={url}
                                 alt={camNames[idx] + '实时图像'}
-                                style={{ maxWidth: '100%', maxHeight: '100%', borderRadius: 8 }}
+                                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', borderRadius: 8 }}
+                                draggable={false}
                             />
                         </div>
                     </div>
