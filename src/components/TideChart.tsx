@@ -61,21 +61,8 @@ const TideChart: React.FC<TideChartProps> = ({ data }) => {
         },
     };
 
-    const dateStr = data.length > 0 ? getDateStr(data[0].time) : '';
-    const extremaStr = data.filter(d => d.type).map((d, idx) => (
-        <span key={idx} style={{ color: d.type === '高潮' ? 'red' : 'green', marginLeft: 8, fontWeight: 'bold' }}>
-            {d.type} {formatTime(d.time)}
-        </span>
-    ));
-
     return (
-        <div style={{ width: '66%', height: '320px', margin: '0 auto', position: 'relative' }}>
-            {(dateStr || extremaStr.length > 0) && (
-                <div style={{ position: 'absolute', top: 0, left: 0, fontWeight: 'bold', fontSize: '16px', background: 'rgba(255,255,255,0.8)', padding: '2px 8px', borderRadius: '0 0 8px 0', display: 'flex', alignItems: 'center' }}>
-                    <span>{dateStr}</span>
-                    {extremaStr}
-                </div>
-            )}
+        <div style={{ width: '90%', height: '320px', margin: '0 auto', position: 'relative' }}>
             <Line data={chartData} options={options} />
         </div>
     );

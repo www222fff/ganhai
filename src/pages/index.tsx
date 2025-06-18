@@ -40,9 +40,23 @@ const IndexPage: React.FC = () => {
 
     return (
         <div>
-            <h1>Tidal Data for Qingdao, China</h1>
+            <h1>青岛今日潮汐数据 / Tidal Data for Qingdao, China</h1>
+            {/* 潮汐极值信息放在潮汐图上方并居中 */}
+            {tideData.length > 0 && (
+                <div style={{ textAlign: 'center', fontSize: 20, fontWeight: 'bold', margin: '24px 0 8px 0' }}>
+                    <div>{tideData[0].time.slice(0, 10)}</div>
+                    <div style={{ marginTop: 4 }}>
+                        {tideData.filter(d => d.type).map((d, idx) => (
+                            <span key={idx} style={{ color: d.type === '高潮' ? 'red' : 'green', margin: '0 16px' }}>
+                                {d.type} {d.time.slice(11, 16)}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            )}
             <TideChart data={tideData} />
             {/* 三个实时图像分区，地点为石老人、栈桥、小麦岛 */}
+            <div style={{ height: 24 }} />
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 32 }}>
                 {camImgUrls.map((url, idx) => (
                     <div key={idx} style={{ flex: 1, textAlign: 'center', margin: '0 8px' }}>
