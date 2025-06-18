@@ -5,10 +5,9 @@ import { TideData } from '../types/tide';
 
 const camNames = ['石老人', '栈桥', '小麦岛'];
 const camImgUrls = [
-    // EarthCam 静态图片流或占位图
-    'https://images.earthcam.com/ec_metros/ourcams/fridays.jpg', // 替换为石老人真实流时可用
-    'https://images.earthcam.com/ec_metros/ourcams/miami.jpg',   // 替换为栈桥真实流时可用
-    'https://images.earthcam.com/ec_metros/ourcams/miamibeach.jpg' // 替换为小麦岛真实流时可用
+  '/images/shilaoren.jpg',
+  '/images/zhanqiao.jpg',
+  '/images/xiaomaidao.jpg'
 ];
 
 const IndexPage: React.FC = () => {
