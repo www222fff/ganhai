@@ -5,6 +5,7 @@ import { TideData } from '../types/tide';
 interface TideChartProps {
     data: TideData[];
     date?: string;     // 新增：日期
+    children?: React.ReactNode; // 新增：汛型内容
 }
 
 function formatTime(timeStr: string) {
@@ -17,7 +18,7 @@ function getDateStr(timeStr: string) {
     return tIdx !== -1 ? timeStr.slice(0, tIdx) : timeStr;
 }
 
-const TideChart: React.FC<TideChartProps> = ({ data, date }) => {
+const TideChart: React.FC<TideChartProps> = ({ data, date, children }) => {
     // 提取所有高潮和低潮时间
     const highTides = data.filter(d => d.type === '高潮');
     const lowTides = data.filter(d => d.type === '低潮');
@@ -64,7 +65,13 @@ const TideChart: React.FC<TideChartProps> = ({ data, date }) => {
 
     return (
         <div style={{ margin: '32px 0', padding: 12, border: '1px solid #eee', borderRadius: 8 }}>
-            {date && <div style={{ fontWeight: 'bold', fontSize: 18 }}>{date}</div>}
+            {/* 日期和汛型并排，左上角显示 */}
+            {date && (
+                <div style={{ fontWeight: 'bold', fontSize: 18, display: 'flex', alignItems: 'center' }}>
+                    <span>{date}</span>
+                    {children && <span style={{ marginLeft: 12 }}>{children}</span>}
+                </div>
+            )}
             <div style={{ margin: '8px 0', fontSize: 15 }}>
                 <span style={{ color: 'red', marginRight: 12 }}>高潮: {highTides.map(d => d.time.slice(11, 16)).join(' | ') || '无'}</span>
                 <span style={{ color: 'green' }}>低潮: {lowTides.map(d => d.time.slice(11, 16)).join(' | ') || '无'}</span>
