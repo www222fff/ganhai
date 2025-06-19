@@ -51,7 +51,7 @@ const IndexPage: React.FC = () => {
     return (
         <div>
             <div style={{display:'flex',justifyContent:'flex-end',alignItems:'center',fontWeight:'bold',fontSize:16,marginBottom:8}}>
-                潮高 Tide Height (m)
+                Tide Height (m)
             </div>
             <h1>青岛未来三天潮汐数据 / 3-Day Tidal Data for Qingdao, China</h1>
             {tideDays.map((day, idx) => {
