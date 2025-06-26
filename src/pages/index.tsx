@@ -53,8 +53,8 @@ const IndexPage: React.FC = () => {
             <div style={{display:'flex',justifyContent:'flex-end',alignItems:'center',fontWeight:'bold',fontSize:16,marginBottom:8}}>
                 Tide Height (m)
             </div>
-            <h1>青岛未来三天潮汐数据 / 3-Day Tidal Data for Qingdao, China</h1>
-            {tideDays.map((day, idx) => {
+            <h1>青岛未来两天潮汐数据 / 2-Day Tidal Data for Qingdao, China</h1>
+            {tideDays.slice(0, 2).map((day, idx) => { // 只显示前两天
                 const tideType = getTideType(day.date);
                 let color = '#222';
                 if (tideType === '活汛') color = 'red';
